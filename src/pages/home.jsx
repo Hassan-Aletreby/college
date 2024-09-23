@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { IoIosLogOut } from "react-icons/io";
 import "../style/main.css";
+
 function Home() {
   return (
     <div className="container">
@@ -13,10 +13,17 @@ function Home() {
         <p className="main_text">
           من هنا يمكنك إدارة بيانات الطلاب ومتابعة سجلاتهم
         </p>
-        <div className="main_button">
-          <Link to="/students">
-            <button>عرض قائمة الطلاب</button>
-          </Link>
+        <div className="buttons">
+          <div className="main_button">
+            <Link to="/students">
+              <button>عرض قائمة الطلاب</button>
+            </Link>
+          </div>
+          <div className="main_button">
+            <Link to="/login">
+              <button className="logout-button">تسجيل خروج</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

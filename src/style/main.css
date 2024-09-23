@@ -28,6 +28,10 @@
     margin-block: 20px;
     font-weight: 500;
   }
+  & .buttons {
+    display: flex;
+    gap: 50px;
+  }
   & .main_button {
     & button {
       padding: 10px 20px;
