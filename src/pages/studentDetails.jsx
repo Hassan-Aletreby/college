@@ -52,12 +52,12 @@ const StudentDetailPage = () => {
           <div id="certificate" className="certificate">
             <div className="header">
               <div className="logo1">
-                <img src="/public/images/الجامعة1.jpeg" alt="جامعة الأزهر " />
+                <img src="/images/الجامعة1.jpeg" alt="جامعة الأزهر " />
                 <p>جامعة الأزهر </p>
               </div>
               <div className="logo1">
                 <img
-                  src="/public/images/الكلية.jpeg"
+                  src="/images/الكلية.jpeg"
                   alt="كلية الدراسات الإسلامية والعربية بنين بدمياط الجديدة"
                 />
                 <p>
