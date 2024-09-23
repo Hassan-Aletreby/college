@@ -1,0 +1,84 @@
+:root {
+  font-family: "Aref Ruqaa", serif;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main_container {
+  width: 80%;
+  margin: 0 auto;
+}
+.home_content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: calc(100vh - 150px);
+  & .main_head {
+    font-size: 64px;
+    line-height: 70px;
+    letter-spacing: 4px;
+  }
+  & .main_text {
+    font-size: 32px;
+    margin-block: 20px;
+    font-weight: 500;
+  }
+  & .main_button {
+    & button {
+      padding: 10px 20px;
+      border: 1px solid rgb(43, 94, 204);
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: right;
+      outline: none;
+    }
+    & button:hover {
+      background-color: rgb(0, 16, 105);
+    }
+  }
+}
+/* ________________________________________________________________________________________ */
+.footer {
+  padding: 5px;
+  text-align: center;
+  border-top: 2px solid #ddd;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  font-size: 14px;
+  font-weight: 500;
+  & .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+  }
+}
+/* ________________________________________________________________________________________ */
+.root-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.main_container {
+  width: 80%;
+  margin: 0 auto;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=main.css.map */
