@@ -211,4 +211,123 @@ button:hover {
   border-radius: 8px;
   font-size: 18px;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 90%;
+  }
+  .container {
+    margin-top: 10px;
+  }
+  table th,
+  table td {
+    padding: 2px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 10px;
+  }
+  .student_name {
+    text-align: right;
+    padding-right: 5px !important;
+  }
+  table a {
+    font-size: 12px;
+  }
+  .loading-container {
+    gap: 10px;
+  }
+  .loading-container p {
+    font-size: 12px;
+  }
+  .students_header {
+    font-size: 20px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px !important;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .select_edit {
+    width: 100% !important;
+    font-size: 12px;
+  }
+  .edit_button {
+    margin-bottom: 5px;
+  }
+  label {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  input[type=text],
+  input[type=date] {
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 18px;
+  }
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .search-container input[type=text] {
+    padding: 4px 8px;
+    border: 1px solid black;
+    font-size: 12px;
+  }
+  .export-buttons button {
+    padding: 4px 8px;
+    border: 1px solid rgb(43, 94, 204);
+    font-size: 12px;
+  }
+  .filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+  .filter-group select {
+    margin-right: 5px;
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    justify-content: center;
+  }
+  .pagination .page-item {
+    margin: 0 5px;
+  }
+  .pagination .page-link {
+    display: block;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #007bff;
+    background: #fff;
+    cursor: pointer;
+  }
+  .pagination .page-link:hover {
+    background: #f1f1f1;
+  }
+  .pagination .active .page-link {
+    background: #007bff;
+    color: #fff;
+  }
+  .pagination .page-link:focus {
+    outline: none;
+  }
 }/*# sourceMappingURL=allStudents.css.map */

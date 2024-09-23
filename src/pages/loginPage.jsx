@@ -20,12 +20,20 @@ const Login = () => {
       if (response.data.length > 0) {
         const user = response.data[0];
         localStorage.setItem("authToken", user.token);
-
         toast.success("تم تسجيل الدخول بنجاح!");
         navigate("/");
+      } else {
+        // عرض رسالة خطأ إذا كانت البيانات غير صحيحة
+        toast.error("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
       }
     } catch (error) {
-      toast.error("فشل تسجيل الدخول. حدث خطأ في السيرفر.");
+      if (error.response && error.response.data) {
+        toast.error(
+          `خطأ: ${error.response.data.message || "حدث خطأ في السيرفر."}`
+        );
+      } else {
+        toast.error("فشل تسجيل الدخول. حدث خطأ في السيرفر.");
+      }
     }
   };
 

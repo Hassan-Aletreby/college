@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { RingLoader } from "react-spinners";
-import { toast, Toaster } from "react-hot-toast"; // استيراد toast و Toaster
+import { toast, Toaster } from "react-hot-toast";
 import "../style/allStudents.css";
 
 const EditStudentPage = () => {
@@ -74,7 +74,7 @@ const EditStudentPage = () => {
 
   return (
     <div className="container">
-      <Toaster /> {/* وضع Toaster لعرض الإشعارات */}
+      <Toaster />
       <h1 className="students_header">تعديل بيانات الطالب</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -164,7 +164,9 @@ const EditStudentPage = () => {
             disabled
           />
         </div>
-        <button type="submit">حفظ التعديلات</button>
+        <button type="submit" className="edit_button">
+          حفظ التعديلات
+        </button>
       </form>
     </div>
   );

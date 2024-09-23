@@ -70,9 +70,22 @@
 }
 
 .select_edit {
-  width: 100%;
+  width: 12%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 18px;
-} /*# sourceMappingURL=details.css.map */
+}
+
+@media (max-width: 768px) {
+  .certificate .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .certificate .footer_details {
+    align-items: flex-start;
+    font-size: 12px;
+  }
+  .select_edit {
+    width: 100%;
+  }
+}/*# sourceMappingURL=details.css.map */

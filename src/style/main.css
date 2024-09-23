@@ -84,5 +84,46 @@
   margin: 0;
   padding: 0;
 }
+/* _____________________________________________________________________________________________ */
+@media (max-width: 768px) {
+  .main_container {
+    width: 90%;
+  }
+  .home_content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    height: calc(100vh - 300px);
+    & .main_head {
+      font-size: 32px;
+      line-height: 40px;
+      letter-spacing: 2px;
+    }
+    & .main_text {
+      font-size: 16px;
+    }
+    & .buttons {
+      display: flex;
+      gap: 20px;
+    }
+    & .main_button {
+      & button {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+    }
+  }
+  /* ________________________________________________________________________________________ */
+  .footer {
+    padding: 5px;
+    font-size: 12px;
+    & .container {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+}
 
 /*# sourceMappingURL=main.css.map */

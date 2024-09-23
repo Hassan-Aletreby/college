@@ -1,7 +1,17 @@
+import React from "react";
 import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import "../style/main.css";
 
 function Home() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
+
   return (
     <div className="container">
       <div className="home_content">
@@ -20,9 +30,9 @@ function Home() {
             </Link>
           </div>
           <div className="main_button">
-            <Link to="/login">
-              <button className="logout-button">تسجيل خروج</button>
-            </Link>
+            <button className="logout-button" onClick={handleLogout}>
+              تسجيل خروج
+            </button>
           </div>
         </div>
       </div>

@@ -14,7 +14,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Toaster
       position="top-left"
       toastOptions={{
-        // Define default options
         duration: 3000,
       }}
     />

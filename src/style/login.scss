@@ -4,13 +4,15 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding: 20px;
 }
 .login_content {
   background-color: #cccccc54;
   padding: 24px;
   border-radius: 12px;
   display: flex;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   justify-content: center;
   flex-direction: column;
 }
@@ -21,6 +23,7 @@
   font-size: 42px;
   text-align: center;
 }
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -54,4 +57,21 @@
 
 .login-button:hover {
   background-color: #357abd;
+}
+// ____________________________________________________________________
+@media (max-width: 600px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login_content {
+    width: 80%;
+  }
+
+  .login-title {
+    font-size: 32px;
+  }
 }
