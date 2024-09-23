@@ -51,14 +51,19 @@ const StudentDetailPage = () => {
         <div>
           <div id="certificate" className="certificate">
             <div className="header">
-              <p>
-                جامعة الأزهر <br />
-                كلية الدراسات الإسلامية والعربية <br /> بنين بدمياط الجديدة
-              </p>
-              <img
-                src="/public/images/الكلية.jpeg"
-                alt=" كلية الدراسات الاسلامية والعربية بينين بدمياط الجديدة"
-              />
+              <div className="logo1">
+                <img src="/public/images/الجامعة1.jpeg" alt="جامعة الأزهر " />
+                <p>جامعة الأزهر </p>
+              </div>
+              <div className="logo1">
+                <img
+                  src="/public/images/الكلية.jpeg"
+                  alt="كلية الدراسات الإسلامية والعربية بنين بدمياط الجديدة"
+                />
+                <p>
+                  كلية الدراسات الإسلامية والعربية <br /> بنين بدمياط الجديدة
+                </p>
+              </div>
             </div>
             <h1>نموذج إثبات قيد</h1>
             <div className="grid-container">
@@ -82,6 +87,10 @@ const StudentDetailPage = () => {
               <div className="grid-item">
                 <strong>للعام الجامعي : </strong>
                 2024 / 2025
+              </div>
+              <div className="grid-item">
+                <strong>الحالة : </strong>
+                {student.status}
               </div>
             </div>
             <div className="note">
