@@ -206,7 +206,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 18px;
-  width: 100%;
+  width: 100% !important;
 }
 // _______________________________________________________________________________________
 @media (max-width: 768px) {

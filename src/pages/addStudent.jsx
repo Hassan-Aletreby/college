@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { RingLoader } from "react-spinners";
 import { toast, Toaster } from "react-hot-toast";
 import "../style/allStudents.css";
 
-const EditStudentPage = () => {
-  const { id } = useParams();
+const AddStudentPage = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     nationalId: "",
@@ -21,24 +19,6 @@ const EditStudentPage = () => {
     AcademicBand: "",
   });
 
-  useEffect(() => {
-    const fetchStudent = async () => {
-      setLoading(true);
-      try {
-        const response = await axiosInstance.get("/rest/v1/students", {
-          params: { id: `eq.${id}` },
-        });
-        setFormData(response.data[0]);
-      } catch (error) {
-        setError(error.message);
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchStudent();
-  }, [id]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -49,13 +29,16 @@ const EditStudentPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await axiosInstance.patch(`/rest/v1/students?id=eq.${id}`, formData);
-      toast.success("تم تعديل بيانات الطالب بنجاح!");
+      await axiosInstance.post("/rest/v1/students", formData);
+      toast.success("تم إضافة الطالب بنجاح!");
       navigate("/students");
     } catch (error) {
-      toast.error("حدث خطأ أثناء تعديل البيانات!");
+      toast.error("حدث خطأ أثناء إضافة الطالب!");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,19 +46,15 @@ const EditStudentPage = () => {
     return (
       <div className="loading-container">
         <RingLoader color="#4A90E2" />
-        <p className="loading-message">جاري تحميل البيانات...</p>
+        <p className="loading-message">جاري إضافة الطالب...</p>
       </div>
     );
-  }
-
-  if (error) {
-    return <p>حدث خطأ: {error}</p>;
   }
 
   return (
     <div className="container">
       <Toaster />
-      <h1 className="students_header">تعديل بيانات الطالب</h1>
+      <h1 className="students_header">إضافة طالب جديد</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>الاسم:</label>
@@ -85,7 +64,6 @@ const EditStudentPage = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            disabled
           />
         </div>
         <div className="form-group">
@@ -96,7 +74,6 @@ const EditStudentPage = () => {
             value={formData.nationalId}
             onChange={handleChange}
             required
-            disabled
           />
         </div>
         <div className="form-group">
@@ -131,14 +108,18 @@ const EditStudentPage = () => {
         </div>
         <div className="form-group">
           <label>الشعبة:</label>
-          <input
-            type="text"
+          <select
             name="major"
             value={formData.major}
             onChange={handleChange}
+            className="select_edit"
             required
-            disabled
-          />
+          >
+            <option value="">اختر</option>
+            <option value="الشريعة الإسلامية">الشريعة الإسلامية</option>
+            <option value="اللغة العربية">اللغة العربية</option>
+            <option value="أصول الدين">أصول الدين</option>
+          </select>
         </div>
         <div className="form-group">
           <label>انتظام/انتساب:</label>
@@ -147,6 +128,7 @@ const EditStudentPage = () => {
             value={formData.fullTime}
             onChange={handleChange}
             className="select_edit"
+            required
           >
             <option value="">اختر</option>
             <option value="انتظام">انتظام</option>
@@ -155,21 +137,26 @@ const EditStudentPage = () => {
         </div>
         <div className="form-group">
           <label>الفرقة الدراسية:</label>
-          <input
-            type="text"
+          <select
             name="AcademicBand"
             value={formData.AcademicBand}
             onChange={handleChange}
+            className="select_edit"
             required
-            disabled
-          />
+          >
+            <option value="">اختر</option>
+            <option value="الأولى">الأولى</option>
+            <option value="الثانية">الثانية</option>
+            <option value="الثالثة">الثالثة</option>
+            <option value="الرابعة">الرابعة</option>
+          </select>
         </div>
         <button type="submit" className="edit_button">
-          حفظ التعديلات
+          إضافة الطالب
         </button>
       </form>
     </div>
   );
 };
 
-export default EditStudentPage;
+export default AddStudentPage;

@@ -25,6 +25,11 @@ function Home() {
         </p>
         <div className="buttons">
           <div className="main_button">
+            <Link to="/students/addstudent">
+              <button>إضافة طالب جديد</button>
+            </Link>
+          </div>
+          <div className="main_button">
             <Link to="/students">
               <button>عرض قائمة الطلاب</button>
             </Link>
