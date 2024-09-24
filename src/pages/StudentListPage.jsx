@@ -85,7 +85,15 @@ const StudentListPage = () => {
   };
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = students.filter(
+      (student) =>
+        student.name.toLowerCase().includes(query) ||
+        student.nationalId.includes(query)
+    );
+    setFilteredStudents(filtered);
   };
 
   const handlePageClick = (event) => {
