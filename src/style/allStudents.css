@@ -330,4 +330,49 @@ button:hover {
   .pagination .page-link:focus {
     outline: none;
   }
+  .delete_button {
+    padding: 2px 4px !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+  }
+  .edit_button {
+    padding: 2px 4px !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+  }
+  .mobile {
+    display: none;
+  }
+}
+.delete_button {
+  background-color: #d9534f;
+  color: white !important;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit_button {
+  background-color: #175db8;
+  color: white !important;
+  border: none;
+  padding: 4px 12px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete_button:hover {
+  background-color: #c9302c;
+}
+
+.edit_button:hover {
+  background-color: #094088;
+  font-weight: 500;
+}
+
+.delete_button:focus,
+.edit_button:focus {
+  outline: none;
 }/*# sourceMappingURL=allStudents.css.map */

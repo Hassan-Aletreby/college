@@ -4,6 +4,7 @@ import { RingLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import * as XLSX from "xlsx";
 import axiosInstance from "../api/axiosInstance";
+import ConfirmationDialog from "../components/ConfirmationDialog";
 import "../style/allStudents.css";
 
 const StudentListPage = () => {
@@ -20,6 +21,9 @@ const StudentListPage = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   const studentsPerPage = 15;
+
+  const [showDialog, setShowDialog] = useState(false);
+  const [studentToDelete, setStudentToDelete] = useState(null);
 
   const fetchStudents = async (
     major = "",
@@ -48,14 +52,6 @@ const StudentListPage = () => {
     }
   };
 
-  const filterStudents = (students, query) => {
-    if (!query) return students;
-    return students.filter(
-      (student) =>
-        student.name.includes(query) || student.nationalId.includes(query)
-    );
-  };
-
   useEffect(() => {
     fetchStudents(
       majorFilter,
@@ -65,10 +61,28 @@ const StudentListPage = () => {
     );
   }, [majorFilter, academicBandFilter, statusFilter, fullTimeFilter]);
 
-  useEffect(() => {
-    const filtered = filterStudents(students, searchQuery);
-    setFilteredStudents(filtered);
-  }, [students, searchQuery]);
+  const handleDelete = async (studentId) => {
+    try {
+      await axiosInstance.delete(`/rest/v1/students?id=eq.${studentId}`);
+      setStudents(students.filter((student) => student.id !== studentId));
+      setFilteredStudents(
+        filteredStudents.filter((student) => student.id !== studentId)
+      );
+    } catch (error) {
+      console.error("Error deleting student:", error);
+    }
+    setShowDialog(false);
+  };
+
+  const confirmDelete = (studentId) => {
+    setStudentToDelete(studentId);
+    setShowDialog(true);
+  };
+
+  const cancelDelete = () => {
+    setShowDialog(false);
+    setStudentToDelete(null);
+  };
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -104,6 +118,14 @@ const StudentListPage = () => {
 
   return (
     <div className="container">
+      {showDialog && (
+        <ConfirmationDialog
+          message="هل أنت متأكد من حذف هذا الطالب؟"
+          onConfirm={() => handleDelete(studentToDelete)}
+          onCancel={cancelDelete}
+        />
+      )}
+
       <div className="search-container">
         <div className="export-buttons">
           <button onClick={exportToExcel} className="export-button">
@@ -176,20 +198,20 @@ const StudentListPage = () => {
           </div>
         </div>
       </div>
-
       <table>
         <thead>
           <tr>
             <th>الاسم</th>
             <th>الرقم القومي</th>
-            <th>تاريخ الميلاد</th>
-            <th>العنوان</th>
-            <th>رقم التليفون</th>
+            <th className="mobile">تاريخ الميلاد</th>
+            <th className="mobile">العنوان</th>
+            <th className="mobile">رقم التليفون</th>
             <th>الشعبة</th>
             <th>الفرقة الدراسية</th>
-            <th>انتظام/انتساب</th>
-            <th>الحالة</th>
+            <th className="mobile">انتظام/انتساب</th>
+            <th className="mobile">الحالة</th>
             <th>تعديل</th>
+            <th>حذف</th>
           </tr>
         </thead>
         <tbody>
@@ -202,15 +224,28 @@ const StudentListPage = () => {
                   </Link>
                 </td>
                 <td>{student.nationalId}</td>
-                <td>{student.dateOfBirth}</td>
-                <td>{student.address}</td>
-                <td>{student.phone}</td>
+                <td className="mobile">{student.dateOfBirth}</td>
+                <td className="mobile">{student.address}</td>
+                <td className="mobile">{student.phone}</td>
                 <td>{student.major}</td>
                 <td>{student.AcademicBand}</td>
-                <td>{student.fullTime}</td>
-                <td>{student.status}</td>
+                <td className="mobile">{student.fullTime}</td>
+                <td className="mobile">{student.status}</td>
                 <td>
-                  <Link to={`/students/${student.id}/edit`}>تعديل</Link>
+                  <Link
+                    to={`/students/${student.id}/edit`}
+                    className="edit_button"
+                  >
+                    تعديل
+                  </Link>
+                </td>
+                <td>
+                  <button
+                    className="delete_button"
+                    onClick={() => confirmDelete(student.id)}
+                  >
+                    حذف
+                  </button>
                 </td>
               </tr>
             ))
