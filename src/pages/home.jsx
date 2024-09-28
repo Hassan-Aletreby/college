@@ -3,13 +3,19 @@ import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 import "../style/main.css";
+import axiosInstance from "../api/axiosInstance";
 
 function Home() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post("/auth/v1/logout");
+      localStorage.removeItem("authToken");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

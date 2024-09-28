@@ -13,27 +13,22 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axiosInstance.get(
-        `/rest/v1/college_users?user_email=eq.${email}&user_password=eq.${password}`
+      const response = await axiosInstance.post(
+        "/auth/v1/token?grant_type=password",
+        {
+          email,
+          password,
+        }
       );
 
-      if (response.data.length > 0) {
-        const user = response.data[0];
-        localStorage.setItem("authToken", user.token);
+      if (response.data) {
+        const user = response.data;
+        localStorage.setItem("authToken", JSON.stringify(user.access_token));
         toast.success("تم تسجيل الدخول بنجاح!");
         navigate("/");
-      } else {
-        // عرض رسالة خطأ إذا كانت البيانات غير صحيحة
-        toast.error("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
       }
     } catch (error) {
-      if (error.response && error.response.data) {
-        toast.error(
-          `خطأ: ${error.response.data.message || "حدث خطأ في السيرفر."}`
-        );
-      } else {
-        toast.error("فشل تسجيل الدخول. حدث خطأ في السيرفر.");
-      }
+      throw new Error(error);
     }
   };
 

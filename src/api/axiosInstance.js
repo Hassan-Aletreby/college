@@ -1,8 +1,7 @@
 import axios from "axios";
-// import { toast } from "react-toastify";
 import toast from "react-hot-toast";
-
 import serverErrorHandler from "../helpers/serverErrorHandler";
+
 const axiosInstance = axios.create({
   baseURL: "https://ruxegubfleaphadbqgaz.supabase.co",
   headers: {
@@ -12,13 +11,39 @@ const axiosInstance = axios.create({
   },
 });
 
+axiosInstance.interceptors.request.use(
+  function (config) {
+    const storedToken = localStorage.getItem("authToken");
+    const token = storedToken ? JSON.parse(storedToken) : null;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
 axiosInstance.interceptors.response.use(
   function (response) {
     return response;
   },
   function (error) {
-    const message = serverErrorHandler(error);
-    toast.error(message);
+    if (error.response) {
+      const { status } = error.response;
+      if (status === 401 || status === 403) {
+        toast.error("الرجاء تسجيل الدخول للوصول إلى هذه الصفحة.");
+        localStorage.removeItem("authToken");
+        window.location.href = "/login";
+      } else {
+        const message = serverErrorHandler(error);
+        toast.error(message);
+      }
+    } else {
+      toast.error("حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.");
+    }
     return Promise.reject(error);
   }
 );
